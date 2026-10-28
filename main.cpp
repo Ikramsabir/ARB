@@ -25,17 +25,36 @@ Noeud* CreerNoeud(int x) {
     return p;
 }
 
+
 Noeud* Inserer(Noeud* A, int x) {
     if (A == NULL)
         return CreerNoeud(x);
 
-    if (x < A->valeur)
-        A->gauche = Inserer(A->gauche, x);
-    else if (x > A->valeur)
-        A->droite = Inserer(A->droite, x);
+    Noeud* p = A;
+
+    while (true) {
+        if (x < p->valeur) {
+            if (p->gauche == NULL) {
+                p->gauche = CreerNoeud(x);
+                break;
+            }
+            p = p->gauche;
+        }
+        else if (x > p->valeur) {
+            if (p->droite == NULL) {
+                p->droite = CreerNoeud(x);
+                break;
+            }
+            p = p->droite;
+        }
+        else {
+            break;
+        }
+    }
 
     return A;
 }
+
 
 Noeud* Recherche(Noeud* A, int x) {
     if (A == NULL)
